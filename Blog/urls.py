@@ -16,6 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from BlogApp.views import *
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', index, name='home'),
+    url(r'^post/(?P<id>(\d)+)$', show_post, name='post'),
+    url(r'^new$', NewPostView.as_view(), name='new'),
+    url(r'^edit/(?P<id>(\d)+)$', EditPostView.as_view(), name='edit'),
+    url(r'^delete/(?P<id>(\d)+)$', DeletePostView.as_view(), name='delete'),
 ]
