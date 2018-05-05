@@ -20,9 +20,15 @@
                     {{ post.description|slice:":50"|safe }}...
                 </td>
                 <td>{{ post.updated_at }}</td>
-                <td><button class="btn btn-warning">edit</button></td>
                 <td>
-                    <a href="{% url 'delete' post.id %}"><button class="btn btn-danger">delete</button></a>
+                    <a href="{% url 'edit' post.id %}">
+                        <button class="btn btn-warning">edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'delete' post.id %}">
+                        <button class="btn btn-danger">delete</button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

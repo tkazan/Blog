@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 
-
 from .models import *
 from .forms import *
 
@@ -50,16 +49,33 @@ class NewPostView(View):
             return redirect(reverse("home"))
 
 
-
 class EditPostView(View):
 
     def get(self, request, id):
         """Show a form to edit a post with selected id"""
-        pass
+        post = get_object_or_404(Post, pk=id)
+        ctx = {
+            "post": post,
+        }
+        return render(request, "edit.html", ctx)
 
     def post(self, request, id):
         """Save changes made to selected post to database"""
-        pass
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        post = Post.objects.get(pk=id)
+        try:
+            post.title = title
+            post.description = description
+            post.save()
+            return redirect(reverse("home"))
+        except Exception as e:
+            message = "Something went wrong: {}".format(e)
+            ctx = {
+                "message": message,
+                "post": post,
+            }
+            return render(request, 'edit.html', ctx)
 
 
 class DeletePostView(View):

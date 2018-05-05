@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit post{% endblock %}
+
+{% block content %}
+    {% load wysiwyg %}
+    {% wysiwyg_setup %}
+
+    <h2>Edit post: {{ post.title }}</h2>
+    <p class="text-danger">{{ message }}</p>
+    <form method="POST" action="#">
+    {% csrf_token %}
+        <label>Title
+            <input type="text" name="title" value="{{ post.title }}" class="form-control">
+        </label>
+        <br/>
+        <label>Description:
+            <textarea id="foo" name="description">{{ post.description }}</textarea>
+        </label>
+        <br/>
+        <input class="btn btn-warning" type="submit" value="MODYFIKUJ">
+        <a style="float: right" href="{% url 'home' %}">
+            <button class="btn btn-info">Back</button>
+        </a>
+    </form>
+
+    {% wysiwyg_editor "foo" %}
+{% endblock %}
