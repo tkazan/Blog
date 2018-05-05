@@ -66,7 +66,17 @@ class DeletePostView(View):
 
     def get(self, request, id):
         """Show a form to delete a post with selected id"""
+        post = get_object_or_404(Post, pk=id)
+        ctx = {
+            "post": post,
+        }
+        return render(request, "delete.html", ctx)
 
     def post(self, request, id):
         """Delete a selected post from database"""
-        pass
+        action = request.POST.get("submit")
+
+        if action == "YES":
+            post = Post.objects.get(pk=id)
+            post.delete()
+        return redirect(reverse("home"))
