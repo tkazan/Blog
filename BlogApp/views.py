@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
+
 
 from .models import *
 from .forms import *
@@ -20,7 +21,11 @@ def index(request):
 
 def show_post(request, id):
     """Show a details of post with selected id"""
-    pass
+    post = get_object_or_404(Post, pk=id)
+    ctx = {
+        "post": post,
+    }
+    return render(request, 'post.html', ctx)
 
 
 class NewPostView(View):

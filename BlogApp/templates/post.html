@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+    <h1>{{ post.title }}</h1>
+    <p class="text-danger">last update: {{ post.updated_at }}</p>
+    <hr>
+    <p>{{ post.description|linebreaks }}</p>
+    <a href="{% url 'home' %}"><button class="btn btn-info">Back</button></a>
+
+{% endblock %}
