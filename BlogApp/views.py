@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.views import View
 
 
@@ -32,11 +33,22 @@ class NewPostView(View):
 
     def get(self, request):
         """Show a form to create a new post"""
-        pass
+        form = NewPostForm
+        ctx = {
+            "form": form,
+        }
+        return render(request, 'new.html', ctx)
 
     def post(self, request):
         """Save a new post to database"""
-        pass
+        form = NewPostForm(request.POST)
+        description = request.POST.get('description')
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.description = description
+            f.save()
+            return redirect(reverse("home"))
+
 
 
 class EditPostView(View):

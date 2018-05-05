@@ -17,7 +17,7 @@
                 <td>
                     <a href="{% url 'post' post.id %}">{{ post.title }}</a>
                     <br/>
-                    {{ post.description|slice:":50" }}...
+                    {{ post.description|slice:":50"|safe }}...
                 </td>
                 <td>{{ post.updated_at }}</td>
                 <td><button class="btn btn-warning">edit</button></td>
