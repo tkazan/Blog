@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Post(models.Model):
+    """Store a single Blog Post."""
     title = models.CharField(max_length=128)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

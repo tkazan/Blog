@@ -12,7 +12,7 @@ from .forms import *
 
 
 def index(request):
-    """Show a list of posts from newest with links to post details"""
+    """Show a list of posts from newest with links to post details."""
     post_list = Post.objects.all().order_by('-created_at')
     page = request.GET.get('page', 1)
     paginator = Paginator(post_list, 5)
@@ -27,7 +27,7 @@ def index(request):
 
 
 def show_post(request, id):
-    """Show a details of post with selected id"""
+    """Show a details of post with selected id."""
     post = get_object_or_404(Post, pk=id)
     ctx = {
         "post": post,
@@ -38,7 +38,7 @@ def show_post(request, id):
 class NewPostView(View):
 
     def get(self, request):
-        """Show a form to create a new post"""
+        """Show a form to create a new post."""
         form = NewPostForm
         ctx = {
             "form": form,
@@ -46,7 +46,7 @@ class NewPostView(View):
         return render(request, 'new.html', ctx)
 
     def post(self, request):
-        """Save a new post to database"""
+        """Save a new post to database."""
         form = NewPostForm(request.POST)
         description = request.POST.get('description')
         if form.is_valid():
@@ -59,7 +59,7 @@ class NewPostView(View):
 class EditPostView(View):
 
     def get(self, request, id):
-        """Show a form to edit a post with selected id"""
+        """Show a form to edit a post with selected id."""
         post = get_object_or_404(Post, pk=id)
         ctx = {
             "post": post,
@@ -67,7 +67,7 @@ class EditPostView(View):
         return render(request, "edit.html", ctx)
 
     def post(self, request, id):
-        """Save changes made to selected post to database"""
+        """Save changes made to selected post to database."""
         title = request.POST.get("title")
         description = request.POST.get("description")
         post = Post.objects.get(pk=id)
@@ -88,7 +88,7 @@ class EditPostView(View):
 class DeletePostView(View):
 
     def get(self, request, id):
-        """Show a form to delete a post with selected id"""
+        """Show a form to delete a post with selected id."""
         post = get_object_or_404(Post, pk=id)
         ctx = {
             "post": post,
@@ -96,7 +96,7 @@ class DeletePostView(View):
         return render(request, "delete.html", ctx)
 
     def post(self, request, id):
-        """Delete a selected post from database"""
+        """Delete a selected post from database."""
         action = request.POST.get("submit")
 
         if action == "YES":
