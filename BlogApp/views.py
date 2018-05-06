@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import *
 from .forms import *
@@ -12,11 +13,17 @@ from .forms import *
 
 def index(request):
     """Show a list of posts from newest with links to post details"""
-    posts = Post.objects.all().order_by('-created_at')
-    ctx = {
-        "posts": posts,
-    }
-    return render(request, 'index.html', ctx)
+    post_list = Post.objects.all().order_by('-created_at')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(post_list, 5)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'index.html', {"posts": posts})
 
 
 def show_post(request, id):
