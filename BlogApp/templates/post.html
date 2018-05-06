@@ -8,6 +8,21 @@
     <p class="text-danger">last update: {{ post.updated_at }}</p>
     <hr>
     <p>{{ post.description|safe|linebreaks }}</p>
-    <a href="{% url 'home' %}"><button class="btn btn-info">Back</button></a>
+
+    <div class="float-left">
+        {% if post.get_previous_by_created_at.id %}
+        <a href="{% url 'post' post.get_previous_by_created_at.id %}"><button class="btn btn-info">Previous</button></a>
+        {% else %}
+        <button class="btn btn-danger">Last</button>
+        {% endif %}
+
+        {% if post.get_next_by_created_at.id %}
+        <a href="{% url 'post' post.get_next_by_created_at.id %}"><button class="btn btn-info">Next</button></a>
+        {% else %}
+        <button class="btn btn-danger">Last</button>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'home' %}"><button class="btn btn-info float-right">Back</button></a>
 
 {% endblock %}
