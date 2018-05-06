@@ -1,0 +1,6 @@
+Django==1.11.6
+django-ckeditor==5.4.0
+django-wysiwyg==0.8.0
+pytz==2018.3
+six==1.11.0
+
