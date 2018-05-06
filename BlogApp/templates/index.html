@@ -15,7 +15,7 @@
         {% for post in posts %}
             <tr>
                 <td>
-                    <a href="{% url 'post' post.id %}">{{ post.title }}</a>
+                    <a class="lead" href="{% url 'post' post.id %}">{{ post.title }}</a>
                     <br/>
                     {{ post.description|slice:":50"|safe }}...
                 </td>
