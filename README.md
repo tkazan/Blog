@@ -1,5 +1,5 @@
 # Blog
-####A simple blogging app created in Python/Django and styled in Bootstrap.
+A simple blogging app created in Python/Django and styled in Bootstrap.
 - List of all posts with pagination and links to details on home page
 - Single post detail view
 - Creating a new post in nice text editor
