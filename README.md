@@ -1,6 +1,14 @@
 # Blog
-####A simple blogging app created in Django.
+####A simple blogging app created in Python/Django and styled in Bootstrap.
+- List of all posts with pagination and links to details on home page
+- Single post detail view
+- Creating a new post in nice text editor
+- Modifying an existing post
+- Deleting posts
 
+<hr>
+
+#### DOCUMENTATION
 - <b>MODELS</b><br/>
 1. Post model to store single post on blog.<br/>
 String method return post's title (first 50 chars) and last update.<br/>
